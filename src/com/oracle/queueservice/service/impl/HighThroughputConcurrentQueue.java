@@ -16,15 +16,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
     final ReentrantLock lock;
-    Random idGenerator;
+    final Random idGenerator;
 
-    final Queue<Object> queue;
-    final Queue<Object> nonReadableQueue;
-    final Map<String, Object> elementIdToObjectMap;
+    volatile Queue<Object> queue;
+    volatile Map<String, Object> elementIdToObjectMap;
     final ScheduledExecutorService watchExecution;
 
     public HighThroughputConcurrentQueue() {
-        this(100);
+        this(1000);
     }
 
     /**
@@ -41,11 +40,8 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
         this.lock = new ReentrantLock(true);
         this.queue = new ConcurrentLinkedQueue<>();
         this.elementIdToObjectMap = new Hashtable<>();
-        this.nonReadableQueue = new ConcurrentLinkedQueue<>();
         this.watchExecution = Executors.newScheduledThreadPool(capacity);
     }
-
-    /* Using List */
 
     /**
      * enqueue.
@@ -84,10 +80,8 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     }
 
     private void poll(final String elementId) {
-        final Queue<Object> queue = this.nonReadableQueue;
         ReadResponse response = (ReadResponse) elementIdToObjectMap.remove(elementId);
-        boolean isSuccess = queue.remove(response);
-        System.out.println("Dequeued element " + response.getObject() + ". Status: " + isSuccess);
+        System.out.println("Dequeued element " + response.getObject());
     }
 
     /**
@@ -100,14 +94,12 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     public ReadResponse read() {
         ReentrantLock lock = this.lock;
         final Queue<Object> queue = this.queue;
-        final Queue<Object> moveQueue = this.nonReadableQueue;
         lock.lock();
         try {
             ReadResponse response = (ReadResponse) queue.peek();
             if (response == null)
                 return null;
             response = (ReadResponse) queue.remove();
-            moveQueue.add(response);
             System.out.println("Read element " + response.getObject());
             return response;
         } finally {
@@ -123,19 +115,17 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     @Override
     public ReadResponse read(int timeout) {
         final Queue<Object> queue = this.queue;
-        final Queue<Object> moveQueue = this.nonReadableQueue;
         try {
             final ReadResponse response = (ReadResponse) queue.peek();
             if (response == null)
                 return null;
             queue.remove();
-            moveQueue.add(response);
             System.out.println("Read element " + response.getObject());
 
             watchExecution.schedule(
                     () -> {
                         System.out.println("Watch Deamon executing");
-                        if (moveQueue.remove(response))
+                        if (elementIdToObjectMap.containsKey(response.getElementId()))
                             queue.add(response);
                         else
                             System.out.println("Element " + response.getObject() + " already dequeued.");
