@@ -2,32 +2,37 @@ package com.oracle.queueservice;
 
 import com.oracle.queueservice.actors.Consumer;
 import com.oracle.queueservice.actors.Producer;
-import com.oracle.queueservice.service.impl.HighlyConcurrentQueue;
+import com.oracle.queueservice.service.IConcurrentQueue;
+import com.oracle.queueservice.service.impl.HighThroughputConcurrentQueue;
+import com.oracle.queueservice.util.Constants;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Application {
     public static void main(String[] args) {
-        HighlyConcurrentQueue<Integer> queue = new HighlyConcurrentQueue<>(5);
+        IConcurrentQueue<Integer> queue = new HighThroughputConcurrentQueue<>();
+        Set<Callable<Integer>> producers = new HashSet<>();
+        Set<Callable<Integer>> consumers = new HashSet<>();
 
-        Producer<Integer> p1 = new Producer<>(1, 10 , queue);
-        Producer<Integer> p2 = new Producer<>(2, 20 , queue);
-        Producer<Integer> p3 = new Producer<>(3, 30 , queue);
+        for (int i = 0; i < Constants.THREADS; i++) {
+            producers.add(new Producer<>(i, i * 10, queue));
+            consumers.add(new Consumer<>(i, queue, 5000));
+        }
 
-        Consumer<Integer> c1 = new Consumer<>(1, queue);
-        Consumer<Integer> c2 = new Consumer<>(2, queue);
-        Consumer<Integer> c3 = new Consumer<>(3, queue);
-
-        Thread tp1 = new Thread(p1);
-        Thread tp2 = new Thread(p2);
-        Thread tp3 = new Thread(p3);
-        Thread tc1 = new Thread(c1);
-        Thread tc2 = new Thread(c2);
-        Thread tc3 = new Thread(c3);
-
-        tp1.start();
-        tp2.start();
-        tp3.start();
-        tc1.start();
-        tc2.start();
-        tc3.start();
+        ExecutorService executorP = Executors.newFixedThreadPool(Constants.THREAD_POOL);
+        ExecutorService executorC = Executors.newFixedThreadPool(Constants.THREAD_POOL);
+        try {
+            executorP.invokeAll(producers);
+            executorC.invokeAll(consumers);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            executorP.shutdown();
+            executorC.shutdown();
+        }
     }
 }

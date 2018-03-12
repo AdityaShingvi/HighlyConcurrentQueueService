@@ -1,14 +1,16 @@
 package com.oracle.queueservice.actors;
 
-import com.oracle.queueservice.service.impl.HighlyConcurrentQueue;
+import com.oracle.queueservice.service.IConcurrentQueue;
 
-public class Producer<T> implements Runnable {
+import java.util.concurrent.Callable;
+
+public class Producer<T> implements Callable<T> {
 
     private int id;
-    private HighlyConcurrentQueue<T> queue;
+    private IConcurrentQueue<T> queue;
     private T element;
 
-    public Producer(int id, T element, HighlyConcurrentQueue<T> queue) {
+    public Producer(int id, T element, IConcurrentQueue<T> queue) {
         this.id = id;
         this.queue = queue;
         this.element = element;
@@ -26,7 +28,9 @@ public class Producer<T> implements Runnable {
      * @see Thread#run()
      */
     @Override
-    public void run() {
-        System.out.println("Producer " + id + " producing data...Status: " + queue.enqueue(element));
+    public T call() {
+        queue.enqueue(element);
+//        System.out.println("Producer " + id + " producing data...Data: " + element);
+        return element;
     }
 }

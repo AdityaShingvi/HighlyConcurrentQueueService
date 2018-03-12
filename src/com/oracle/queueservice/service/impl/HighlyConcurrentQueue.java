@@ -3,7 +3,9 @@ package com.oracle.queueservice.service.impl;
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
 
+import java.util.Deque;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -12,6 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
 
     final Object[] highlyConcurrentQueue;
+    final Deque<Object> queue;
     final Map<String, Integer> elementIdToQueueIndexMap;
     final Map<String, Boolean> isElementReadableMap;
     final PriorityQueue<Integer> emptyIndexes;
@@ -45,6 +48,7 @@ public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
         this.isElementReadableMap = new Hashtable<>();
         this.emptyIndexes = new PriorityQueue<>();
         this.lock = new ReentrantLock(true);
+        this.queue = new LinkedList<>();
     }
 
     /**
@@ -101,10 +105,13 @@ public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
         queue[nextWriteIndex] = inputObject;
         System.out.println("Enqueued element " + object + " at position " + nextWriteIndex);
         elementIdToQueueIndexMap.put(elementId, nextWriteIndex);
-        System.out.println("Mapped " + elementId + " -> " + nextWriteIndex);
+        //System.out.println("Mapped " + elementId + " -> " + nextWriteIndex);
         count++;
-        if (++nextWriteIndex == queue.length && count < queue.length) {
-            nextWriteIndex = emptyIndexes.poll();
+        if (++nextWriteIndex == queue.length) {
+            if (emptyIndexes.size() > 0)
+                nextWriteIndex = emptyIndexes.poll();
+            else if (count < queue.length)
+                nextWriteIndex = 0;
         }
     }
 
@@ -140,9 +147,11 @@ public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
                 //isElementReadableMap.put(readResponse.getElementId(), false);
                 System.out.println("Read element " + readResponse.getObject() + " at position " + nextReadIndex);
                 queue[nextReadIndex] = null;
-                emptyIndexes.add(nextReadIndex);
+                if (nextReadIndex != nextWriteIndex)
+                    emptyIndexes.add(nextReadIndex);
                 if (++nextReadIndex == queue.length && count > 0)
                     nextReadIndex = 0;
+                count--;
                 offer(readResponse.getElementId(), (T) readResponse.getObject());
                 return readResponse;
         } finally {
@@ -150,10 +159,11 @@ public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
         }
     }
 
-    private boolean isReadable(Object o) {
-        ReadResponse response = (ReadResponse) o;
-        if (o == null) return false;
-        if (isElementReadableMap.get(response.getElementId())) return true;
-        return false;
+    /**
+     * @param timeout
+     */
+    @Override
+    public ReadResponse read(int timeout) {
+        return null;
     }
 }

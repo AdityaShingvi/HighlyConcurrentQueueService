@@ -12,7 +12,6 @@ public interface IConcurrentQueue<T> {
 
     /**
      * read.
-     * @param timeout in seconds
      * @return @link{ReadResponse}
      */
     ReadResponse read();
@@ -22,4 +21,10 @@ public interface IConcurrentQueue<T> {
      * @param elementId
      */
     void dequeue(String elementId);
+
+    /**
+     *
+     * @param timeout
+     */
+    ReadResponse read(int timeout);
 }
