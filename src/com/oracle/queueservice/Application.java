@@ -11,28 +11,27 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
 
 public class Application {
     public static void main(String[] args) {
         IConcurrentQueue<Integer> queue = new HighThroughputConcurrentQueue<>();
-        Set<Callable<Integer>> producers = new HashSet<>();
-        Set<Callable<Integer>> consumers = new HashSet<>();
+        Set<Callable<Integer>> workers = new HashSet<>();
 
-        for (int i = 0; i < Constants.THREADS; i++) {
-            producers.add(new Producer<>(i, i * 10, queue));
-            consumers.add(new Consumer<>(i, queue, 5000));
-        }
+        IntStream.range(0, Constants.THREADS)
+                .forEach(i -> {
+                    workers.add(new Producer<>(i, i*10, queue));
+                    workers.add(new Consumer<>(i, queue, Constants.TIMEOUT));
+                });
 
-        ExecutorService executorP = Executors.newFixedThreadPool(Constants.THREAD_POOL);
-        ExecutorService executorC = Executors.newFixedThreadPool(Constants.THREAD_POOL);
+        ExecutorService executor = Executors.newFixedThreadPool(Constants.THREAD_POOL);
+
         try {
-            executorP.invokeAll(producers);
-            executorC.invokeAll(consumers);
+            executor.invokeAll(workers);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            executorP.shutdown();
-            executorC.shutdown();
+            executor.shutdown();
         }
     }
 }

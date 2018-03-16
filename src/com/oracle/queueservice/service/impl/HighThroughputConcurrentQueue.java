@@ -2,6 +2,7 @@ package com.oracle.queueservice.service.impl;
 
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
+import com.oracle.queueservice.util.Constants;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -11,53 +12,67 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * A Queue library that supports concurrent Producer Consumer system.
+ * Multiple Producers can produce to the Queue at the same time without blocking
+ * each other. Similarly, multiple consumers can consume from the queue without
+ * blocking each other. The consumers have a timeout associated with their read
+ * operation. During this timeout, they can dequeue the object from the queue
+ * and until then the object won't be available for subsequent reads for any other consumers.
+ * Only after the timeout, the object will be made available again for read if its not already dequeued.
+ * Each object is associated with an ElementId, which is used for the dequeue operation by the consumers.
+ * This elementId is returned as a part of {@code ReadResponse}to the consumers as a result of the read() call.
+ *
+ * @param <T>
+ */
 public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
-    final ReentrantLock lock;
-    final Random idGenerator;
+    volatile Random idGenerator;
 
-    volatile Queue<Object> queue;
+    final Queue<Object> queue;
     volatile Map<String, Object> elementIdToObjectMap;
     final ScheduledExecutorService watchExecution;
 
     public HighThroughputConcurrentQueue() {
-        this(1000);
+        this(Constants.THREAD_POOL);
     }
 
     /**
-     * Creates an {@code ArrayBlockingQueue} with the given (fixed)
+     * Creates an {@code ConcurrentLinkedQueue} with the given (fixed)
      * capacity and default access policy.
      *
      * @param capacity the capacity of this queue
-     * @throws IllegalArgumentException if {@code capacity < 1}
+     * @throws {@code IllegalArgumentException} if {@code capacity < 1}
      */
     public HighThroughputConcurrentQueue(int capacity) {
         if (capacity < 1)
             throw new IllegalArgumentException();
+
         this.idGenerator = new Random();
-        this.lock = new ReentrantLock(true);
         this.queue = new ConcurrentLinkedQueue<>();
         this.elementIdToObjectMap = new Hashtable<>();
         this.watchExecution = Executors.newScheduledThreadPool(capacity);
     }
 
     /**
-     * enqueue.
+     * Non-blocking operation to Produce items to the queue.
+     * If the param is {@code null}, throws a {@code NullPointerException}
      *
-     * @param object T
+     * @param object An element of Type T that will be added to the queue as a part
+     *               of {@code ReadResponse} object.
      */
     @Override
     public boolean enqueue(Object object) {
         if (object == null)
             throw new NullPointerException();
-            offer((T) object);
-            return true;
+
+        offer((T) object);
+        return true;
     }
 
     private void offer(T object) {
-        String elementId = "e-" + idGenerator.nextInt(1000);
+        String elementId = Constants.ELEMENT_ID_APPENDER + idGenerator.nextInt(1000);
         offer(elementId, object);
     }
 
@@ -70,7 +85,8 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     }
 
     /**
-     * dequeue.
+     * Non-blocking operation to Dequeue the object specified by
+     * the {@code elementId} from the queue.
      *
      * @param elementId
      */
@@ -85,59 +101,34 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     }
 
     /**
-     * read.
-     *
-     * //@param timeout in seconds
-     * @return @link{ReadResponse}
-     */
-    @Override
-    public ReadResponse read() {
-        ReentrantLock lock = this.lock;
-        final Queue<Object> queue = this.queue;
-        lock.lock();
-        try {
-            ReadResponse response = (ReadResponse) queue.peek();
-            if (response == null)
-                return null;
-            response = (ReadResponse) queue.remove();
-            System.out.println("Read element " + response.getObject());
-            return response;
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    /**
-     *
+     * Non-blocking Read operation for reading objects from the queue.
      * @param timeout
      * @return
      */
     @Override
     public ReadResponse read(int timeout) {
+        if (timeout < 0) return null;
+
         final Queue<Object> queue = this.queue;
-        try {
-            final ReadResponse response = (ReadResponse) queue.peek();
-            if (response == null)
-                return null;
-            queue.remove();
-            System.out.println("Read element " + response.getObject());
+        final ReadResponse response = (ReadResponse) queue.peek();
+        if (response == null)
+            return null;
 
-            watchExecution.schedule(
-                    () -> {
-                        System.out.println("Watch Deamon executing");
-                        if (elementIdToObjectMap.containsKey(response.getElementId()))
-                            queue.add(response);
-                        else
-                            System.out.println("Element " + response.getObject() + " already dequeued.");
-                        System.out.println("Queue size : " + queue.size());
-                        watchExecution.shutdown();
-                    },
-                    timeout, TimeUnit.MILLISECONDS);
+        queue.remove();
+        System.out.println("Read element " + response.getObject());
 
-            return response;
-        } catch (Exception e) {
+        watchExecution.schedule(
+                () -> {
+                    System.out.println("Watch Deamon executing");
+                    if (elementIdToObjectMap.containsKey(response.getElementId()))
+                        queue.add(response);
+                    else
+                        System.out.println("Element " + response.getObject() + " already dequeued.");
+                    System.out.println("Queue size : " + queue.size());
+                    watchExecution.shutdown();
+                },
+                timeout, TimeUnit.MILLISECONDS);
 
-        }
-        return null;
+        return response;
     }
 }

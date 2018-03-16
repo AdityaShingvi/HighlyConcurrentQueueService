@@ -10,7 +10,7 @@ public class Producer<T> implements Callable<T> {
     private IConcurrentQueue<T> queue;
     private T element;
 
-    public Producer(int id, T element, IConcurrentQueue<T> queue) {
+    public Producer(final int id, final T element, final IConcurrentQueue<T> queue) {
         this.id = id;
         this.queue = queue;
         this.element = element;
@@ -29,6 +29,7 @@ public class Producer<T> implements Callable<T> {
      */
     @Override
     public T call() {
+        System.out.println("Producer " + Thread.currentThread().getName());
         queue.enqueue(element);
 //        System.out.println("Producer " + id + " producing data...Data: " + element);
         return element;

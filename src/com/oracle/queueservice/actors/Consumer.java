@@ -18,25 +18,23 @@ public class Consumer<T> implements Callable<T> {
     }
 
     /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
+     * Computes a result, or throws an exception if unable to do so.
      *
-     * @see Thread#run()
+     * @return computed result
+     * @throws Exception if unable to compute a result
      */
     @Override
-    public T call() {
+    public T call() throws InterruptedException {
+        System.out.println("Call " + Thread.currentThread().getName());
         ReadResponse response = queue.read(timeout);
         if (response != null) {
             if (id % 5 == 0) {
                 try {
+                    System.out.println("Try " + Thread.currentThread().getName());
                     Thread.sleep(2000);
                     queue.dequeue(response.getElementId());
                 } catch (InterruptedException e) {
+                    System.out.println("Catch " + Thread.currentThread().getName());
                     e.printStackTrace();
                 }
             }

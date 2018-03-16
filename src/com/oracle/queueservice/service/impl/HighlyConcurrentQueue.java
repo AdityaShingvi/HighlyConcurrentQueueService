@@ -137,7 +137,6 @@ public class HighlyConcurrentQueue<T> implements IConcurrentQueue {
      * //@param timeout in seconds
      * @return @link{ReadResponse}
      */
-    @Override
     public ReadResponse read() {
         ReentrantLock lock = this.lock;
         final Object[] queue = this.highlyConcurrentQueue;

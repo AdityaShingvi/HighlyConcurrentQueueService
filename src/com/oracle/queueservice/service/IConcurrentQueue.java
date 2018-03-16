@@ -11,12 +11,6 @@ public interface IConcurrentQueue<T> {
     boolean enqueue(T object);
 
     /**
-     * read.
-     * @return @link{ReadResponse}
-     */
-    ReadResponse read();
-
-    /**
      * dequeue.
      * @param elementId
      */
