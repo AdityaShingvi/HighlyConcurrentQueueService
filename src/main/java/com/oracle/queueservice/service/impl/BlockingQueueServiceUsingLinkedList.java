@@ -3,15 +3,10 @@ package com.oracle.queueservice.service.impl;
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
 
-import java.util.Deque;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ConcurrentQueueService<T> implements IConcurrentQueue {
+public class BlockingQueueServiceUsingLinkedList<T> implements IConcurrentQueue {
 
     final Object[] highlyConcurrentQueue;
     final Map<String, Integer> elementIdToQueueIndexMap;
@@ -26,7 +21,7 @@ public class ConcurrentQueueService<T> implements IConcurrentQueue {
     final Map<String, Object> elementIdToObjectMap;
     final Object nextRead;
 
-    public ConcurrentQueueService() {
+    public BlockingQueueServiceUsingLinkedList() {
         this(100);
     }
 
@@ -37,7 +32,7 @@ public class ConcurrentQueueService<T> implements IConcurrentQueue {
      * @param capacity the capacity of this queue
      * @throws IllegalArgumentException if {@code capacity < 1}
      */
-    public ConcurrentQueueService(int capacity) {
+    public BlockingQueueServiceUsingLinkedList(int capacity) {
         if (capacity < 1)
             throw new IllegalArgumentException();
 

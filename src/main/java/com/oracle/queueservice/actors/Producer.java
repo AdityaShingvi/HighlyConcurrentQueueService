@@ -17,15 +17,9 @@ public class Producer<T> implements Callable<T> {
     }
 
     /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
+     * Computes a result, or throws an exception if unable to do so.
      *
-     * @see Thread#run()
+     * @return the element to be produced if success.
      */
     @Override
     public T call() {

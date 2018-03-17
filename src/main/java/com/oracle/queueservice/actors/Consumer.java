@@ -20,11 +20,10 @@ public class Consumer<T> implements Callable<T> {
     /**
      * Computes a result, or throws an exception if unable to do so.
      *
-     * @return computed result
-     * @throws Exception if unable to compute a result
+     * @return object of type T that was consumed from the queue.
      */
     @Override
-    public T call() throws InterruptedException {
+    public T call() {
         System.out.println("Call " + Thread.currentThread().getName());
         ReadResponse response = queue.read(timeout);
         if (response != null) {

@@ -1,5 +1,6 @@
 package com.oracle.queueservice.service;
 
+
 import com.oracle.queueservice.model.ReadResponse;
 
 public interface IConcurrentQueue<T> {

@@ -13,15 +13,7 @@ public class ReadResponse<T> {
         return elementId;
     }
 
-    public void setElementId(String elementId) {
-        this.elementId = elementId;
-    }
-
     public T getObject() {
         return object;
-    }
-
-    public void setObject(T object) {
-        this.object = object;
     }
 }
