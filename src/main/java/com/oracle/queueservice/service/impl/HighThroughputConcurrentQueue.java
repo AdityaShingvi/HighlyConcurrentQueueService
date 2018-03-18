@@ -3,7 +3,6 @@ package com.oracle.queueservice.service.impl;
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
 import com.oracle.queueservice.util.Constants;
-import lombok.extern.log4j.Log4j2;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -47,7 +46,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
      * @param threadPoolcapacity the capacity of this queue
      * @throws {@code IllegalArgumentException} if {@code capacity < 1}
      */
-    public HighThroughputConcurrentQueue(int threadPoolcapacity) {
+    public HighThroughputConcurrentQueue(int threadPoolcapacity) throws IllegalArgumentException {
         if (threadPoolcapacity < 1)
             throw new IllegalArgumentException();
 
@@ -83,7 +82,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
         final Queue<Object> queue = this.queue;
         queue.add(inputObject);
         elementIdToObjectMap.put(elementId, inputObject);
-        System.out.println("Enqueued element " + object );
+        System.out.println("Enqueued (" + inputObject.getElementId() + ", " + object + ")");
     }
 
     /**
@@ -99,7 +98,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
     private void poll(final String elementId) {
         ReadResponse response = (ReadResponse) elementIdToObjectMap.remove(elementId);
-        System.out.println("Dequeued element " + response.getObject());
+        System.out.println("Dequeued (" + response.getElementId() +", "  + response.getObject() + ")");
     }
 
     /**
@@ -118,15 +117,16 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
             return null;
 
         queue.remove();
-        System.out.println("Read element " + response.getObject());
+        System.out.println("Read (" + response.getElementId() +", "  + response.getObject() + ")");
 
         watchExecution.schedule(
                 () -> {
-//                    System.out.println("Watch Deamon executing");
-                    if (elementIdToObjectMap.containsKey(response.getElementId()))
-                        queue.add(response);
+                    if (elementIdToObjectMap.containsKey(response.getElementId())) {
+                        elementIdToObjectMap.remove(response.getElementId());
+                        enqueue(response.getObject());
+                    }
                     else
-                          System.out.println("Element " + response.getObject() + " already dequeued.");
+                        System.out.println("Element (" + response.getElementId() +", "  + response.getObject() + ") already dequeued!");
                     System.out.println("Queue size : " + queue.size());
                     watchExecution.shutdown();
                 },

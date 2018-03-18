@@ -20,20 +20,25 @@ public class Consumer<T> implements Callable<T> {
      */
     @Override
     public T call() {
-        System.out.println("Call " + Thread.currentThread().getName());
+        long startTime = System.currentTimeMillis();
+        // Read element from queue
         ReadResponse response = queue.read(timeout);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Read Latency: " + (endTime - startTime));
         if (response != null) {
+            // Dequeue elements if they are divisible by 5
             if (id % 5 == 0) {
                 try {
-                    System.out.println("Try " + Thread.currentThread().getName());
                     Thread.sleep(2000);
+                    long startTimeDq = System.currentTimeMillis();
+                    // Dequeue element from queue
                     queue.dequeue(response.getElementId());
+                    long endTimeDq = System.currentTimeMillis();
+                    System.out.println("Dequeue Latency: " + (endTimeDq - startTimeDq));
                 } catch (InterruptedException e) {
-                    System.out.println("Catch " + Thread.currentThread().getName());
                     e.printStackTrace();
                 }
             }
-//            System.out.println("Consumer " + id + " consuming data " + response.getObject().toString());
         }
         else
             System.out.println("Consumer " + id + ", nothing to Consume ");

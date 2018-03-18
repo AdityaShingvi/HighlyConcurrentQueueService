@@ -13,15 +13,17 @@ public class Producer<T> implements Callable<T> {
     private T element;
 
     /**
-     * Computes a result, or throws an exception if unable to do so.
+     * Produces element to the queue and returns it.
      *
-     * @return the element to be produced if success.
+     * @return the element to be produced.
      */
     @Override
     public T call() {
-        System.out.println("Producer " + Thread.currentThread().getName());
+        long startTime = System.currentTimeMillis();
+        // Enqueue element to queue
         queue.enqueue(element);
-//        System.out.println("Producer " + id + " producing data...Data: " + element);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Enqueue Latency: " + (endTime - startTime));
         return element;
     }
 }

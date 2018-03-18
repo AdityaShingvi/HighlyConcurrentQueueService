@@ -1,0 +1,623 @@
+/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=58684:/Applications/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath /Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/jaccess.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/lib/tools.jar:/Users/adi/Documents/workspace/HighlyConcurrentQueueService/HighlyConcurrentQueueService/target/classes com.oracle.queueservice.Application
+objc[38536]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/bin/java (0x10d58f4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10e5e44e0). One of the two will be used. Which one is undefined.
+Read Latency: 0
+Consumer 84, nothing to Consume 
+Read Latency: 0
+Consumer 41, nothing to Consume 
+Read Latency: 0
+Consumer 71, nothing to Consume 
+Read Latency: 0
+Consumer 89, nothing to Consume 
+Read Latency: 0
+Consumer 4, nothing to Consume 
+Enqueued (e-5, 245)
+Read (e-5, 245)
+Enqueue Latency: 3
+Read Latency: 0
+Consumer 59, nothing to Consume 
+Enqueued (e-592, 215)
+Read (e-592, 215)
+Enqueue Latency: 0
+Read Latency: 0
+Consumer 88, nothing to Consume 
+Read Latency: 0
+Consumer 90, nothing to Consume 
+Enqueued (e-92, 90)
+Enqueue Latency: 0
+Enqueued (e-420, 250)
+Enqueue Latency: 1
+Read (e-92, 90)
+Enqueued (e-240, 315)
+Enqueue Latency: 0
+Enqueued (e-645, 240)
+Enqueue Latency: 1
+Read (e-420, 250)
+Read (e-240, 315)
+Enqueued (e-126, 330)
+Enqueue Latency: 0
+Enqueued (e-560, 290)
+Enqueue Latency: 0
+Read (e-645, 240)
+Enqueued (e-632, 130)
+Enqueue Latency: 1
+Read Latency: 4
+Enqueued (e-915, 380)
+Enqueue Latency: 0
+Read Latency: 2
+Read Latency: 3
+Enqueued (e-971, 440)
+Enqueue Latency: 0
+Read (e-126, 330)
+Read (e-560, 290)
+Read (e-632, 130)
+Read Latency: 0
+Enqueued (e-505, 120)
+Enqueue Latency: 0
+Read Latency: 0
+Read Latency: 5
+Read (e-915, 380)
+Read Latency: 2
+Enqueued (e-305, 50)
+Read Latency: 2
+Read Latency: 1
+Read Latency: 0
+Enqueue Latency: 0
+Enqueued (e-700, 140)
+Enqueue Latency: 0
+Read (e-971, 440)
+Enqueued (e-633, 475)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-47, 400)
+Enqueue Latency: 0
+Read (e-505, 120)
+Read (e-305, 50)
+Read (e-700, 140)
+Read Latency: 1
+Enqueued (e-795, 385)
+Enqueue Latency: 0
+Read Latency: 0
+Read Latency: 0
+Enqueued (e-43, 265)
+Enqueue Latency: 0
+Enqueued (e-673, 200)
+Enqueued (e-835, 430)
+Enqueue Latency: 0
+Enqueue Latency: 0
+Enqueued (e-699, 70)
+Enqueued (e-590, 270)
+Enqueue Latency: 0
+Enqueued (e-290, 460)
+Read (e-795, 385)
+Read (e-47, 400)
+Enqueued (e-159, 40)
+Read (e-633, 475)
+Enqueue Latency: 3
+Enqueued (e-819, 470)
+Enqueue Latency: 0
+Enqueue Latency: 0
+Read (e-43, 265)
+Enqueue Latency: 0
+Enqueued (e-615, 325)
+Enqueue Latency: 0
+Enqueued (e-420, 405)
+Enqueue Latency: 0
+Read (e-673, 200)
+Enqueued (e-107, 175)
+Enqueue Latency: 0
+Read Latency: 1
+Read Latency: 1
+Enqueued (e-451, 255)
+Read Latency: 1
+Read Latency: 4
+Enqueue Latency: 0
+Read Latency: 1
+Enqueued (e-741, 185)
+Enqueue Latency: 0
+Enqueued (e-648, 410)
+Enqueue Latency: 0
+Enqueued (e-800, 285)
+Enqueue Latency: 0
+Enqueued (e-407, 375)
+Enqueue Latency: 1
+Read (e-835, 430)
+Enqueued (e-293, 260)
+Enqueue Latency: 0
+Enqueued (e-592, 395)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-777, 180)
+Enqueue Latency: 0
+Enqueued (e-755, 170)
+Enqueue Latency: 0
+Read (e-590, 270)
+Read (e-699, 70)
+Enqueued (e-147, 210)
+Enqueue Latency: 0
+Read (e-159, 40)
+Read (e-290, 460)
+Read (e-819, 470)
+Read Latency: 0
+Enqueued (e-724, 105)
+Enqueue Latency: 0
+Read Latency: 1
+Read (e-420, 405)
+Read (e-615, 325)
+Read Latency: 1
+Read Latency: 1
+Read Latency: 0
+Read Latency: 0
+Read Latency: 1
+Enqueued (e-899, 85)
+Enqueue Latency: 0
+Enqueued (e-271, 55)
+Enqueue Latency: 0
+Enqueued (e-494, 0)
+Enqueue Latency: 0
+Enqueued (e-282, 345)
+Enqueue Latency: 0
+Enqueued (e-840, 60)
+Enqueue Latency: 1
+Read (e-107, 175)
+Read (e-451, 255)
+Read Latency: 0
+Read (e-741, 185)
+Read Latency: 0
+Read (e-648, 410)
+Read Latency: 0
+Enqueued (e-115, 275)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-800, 285)
+Enqueued (e-351, 65)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-407, 375)
+Enqueued (e-237, 305)
+Enqueue Latency: 0
+Read Latency: 1
+Enqueued (e-304, 145)
+Enqueue Latency: 0
+Enqueued (e-222, 450)
+Enqueue Latency: 0
+Read (e-293, 260)
+Read (e-592, 395)
+Read Latency: 0
+Read (e-777, 180)
+Read Latency: 0
+Read Latency: 0
+Enqueued (e-339, 45)
+Enqueue Latency: 0
+Read (e-755, 170)
+Read (e-147, 210)
+Read Latency: 1
+Read (e-724, 105)
+Read Latency: 0
+Read (e-899, 85)
+Read Latency: 0
+Read (e-271, 55)
+Read Latency: 0
+Read (e-494, 0)
+Enqueued (e-484, 190)
+Enqueue Latency: 1
+Enqueued (e-958, 25)
+Enqueue Latency: 0
+Read (e-282, 345)
+Read Latency: 1
+Read Latency: 1
+Read Latency: 0
+Enqueued (e-75, 455)
+Enqueue Latency: 0
+Enqueued (e-804, 15)
+Enqueue Latency: 0
+Enqueued (e-511, 355)
+Enqueue Latency: 0
+Read (e-840, 60)
+Read (e-115, 275)
+Read (e-351, 65)
+Read Latency: 0
+Enqueued (e-797, 125)
+Read Latency: 1
+Enqueue Latency: 0
+Read Latency: 1
+Read (e-237, 305)
+Read (e-304, 145)
+Read Latency: 0
+Read (e-222, 450)
+Read Latency: 0
+Read (e-339, 45)
+Read (e-484, 190)
+Enqueued (e-929, 350)
+Enqueue Latency: 0
+Read Latency: 1
+Read (e-958, 25)
+Read Latency: 1
+Read Latency: 0
+Read (e-75, 455)
+Read Latency: 1
+Read (e-804, 15)
+Read Latency: 0
+Read Latency: 0
+Enqueued (e-166, 425)
+Read (e-511, 355)
+Enqueue Latency: 1
+Enqueued (e-423, 480)
+Enqueue Latency: 0
+Enqueued (e-305, 335)
+Enqueue Latency: 0
+Read Latency: 1
+Enqueued (e-622, 75)
+Enqueue Latency: 0
+Read (e-797, 125)
+Enqueued (e-15, 390)
+Enqueue Latency: 0
+Enqueued (e-410, 135)
+Enqueue Latency: 0
+Read (e-929, 350)
+Read (e-166, 425)
+Read (e-423, 480)
+Read (e-305, 335)
+Read Latency: 1
+Enqueued (e-74, 370)
+Read Latency: 1
+Read (e-622, 75)
+Enqueue Latency: 1
+Read Latency: 1
+Read Latency: 0
+Read Latency: 1
+Read Latency: 0
+Enqueued (e-495, 340)
+Enqueue Latency: 0
+Enqueued (e-784, 365)
+Enqueue Latency: 1
+Read (e-15, 390)
+Read (e-410, 135)
+Read Latency: 0
+Enqueued (e-847, 30)
+Read Latency: 0
+Enqueue Latency: 0
+Read (e-74, 370)
+Read (e-495, 340)
+Read Latency: 0
+Enqueued (e-338, 20)
+Enqueued (e-862, 160)
+Read Latency: 0
+Enqueue Latency: 1
+Enqueue Latency: 1
+Enqueued (e-664, 155)
+Enqueue Latency: 0
+Read (e-784, 365)
+Enqueued (e-956, 465)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-847, 30)
+Read (e-338, 20)
+Read Latency: 0
+Enqueued (e-240, 445)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-657, 95)
+Enqueue Latency: 0
+Enqueued (e-496, 360)
+Enqueue Latency: 0
+Enqueued (e-345, 495)
+Enqueue Latency: 0
+Read (e-862, 160)
+Read (e-664, 155)
+Read Latency: 0
+Enqueued (e-181, 110)
+Read Latency: 0
+Enqueue Latency: 0
+Enqueued (e-91, 310)
+Enqueue Latency: 0
+Read (e-956, 465)
+Read (e-240, 445)
+Read (e-657, 95)
+Read Latency: 1
+Read Latency: 0
+Read Latency: 0
+Enqueued (e-921, 435)
+Enqueue Latency: 0
+Read (e-496, 360)
+Read (e-345, 495)
+Read Latency: 0
+Enqueued (e-96, 5)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-181, 110)
+Read (e-91, 310)
+Read Latency: 1
+Read (e-921, 435)
+Read Latency: 0
+Read Latency: 0
+Read (e-96, 5)
+Read Latency: 0
+Read Latency: 0
+Consumer 29, nothing to Consume 
+Enqueued (e-628, 100)
+Enqueue Latency: 0
+Read (e-628, 100)
+Read Latency: 0
+Consumer 86, nothing to Consume 
+Read Latency: 0
+Enqueued (e-961, 320)
+Enqueue Latency: 1
+Enqueued (e-593, 165)
+Enqueue Latency: 0
+Enqueued (e-676, 115)
+Enqueue Latency: 0
+Enqueued (e-279, 485)
+Enqueue Latency: 0
+Enqueued (e-859, 295)
+Enqueue Latency: 0
+Enqueued (e-773, 220)
+Enqueue Latency: 0
+Enqueued (e-483, 415)
+Enqueue Latency: 0
+Read (e-961, 320)
+Enqueued (e-660, 205)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-593, 165)
+Read (e-676, 115)
+Enqueued (e-260, 35)
+Enqueue Latency: 0
+Read Latency: 0
+Read (e-279, 485)
+Read Latency: 1
+Read (e-859, 295)
+Read Latency: 0
+Enqueued (e-400, 150)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-218, 300)
+Enqueue Latency: 0
+Read (e-773, 220)
+Enqueued (e-398, 195)
+Enqueue Latency: 1
+Enqueued (e-480, 225)
+Read Latency: 1
+Enqueue Latency: 0
+Read (e-483, 415)
+Read (e-660, 205)
+Read Latency: 0
+Read (e-260, 35)
+Read Latency: 0
+Enqueued (e-442, 490)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-83, 420)
+Enqueue Latency: 0
+Enqueued (e-152, 80)
+Enqueue Latency: 0
+Enqueued (e-570, 235)
+Enqueue Latency: 0
+Enqueued (e-676, 230)
+Enqueue Latency: 0
+Read (e-400, 150)
+Enqueued (e-157, 280)
+Enqueue Latency: 0
+Read Latency: 0
+Enqueued (e-932, 10)
+Enqueue Latency: 0
+Dequeued (e-5, 245)
+Dequeue Latency: 0
+Dequeued (e-43, 265)
+Dequeue Latency: 0
+Dequeued (e-741, 185)
+Dequeue Latency: 0
+Dequeued (e-777, 180)
+Dequeue Latency: 0
+Dequeued (e-237, 305)
+Dequeue Latency: 0
+Dequeued (e-899, 85)
+Dequeue Latency: 0
+Dequeued (e-929, 350)
+Dequeued (e-847, 30)
+Dequeued (e-495, 340)
+Dequeued (e-15, 390)
+Dequeue Latency: 0
+Dequeue Latency: 0
+Dequeue Latency: 0
+Dequeued (e-862, 160)
+Dequeue Latency: 0
+Dequeue Latency: 0
+Dequeued (e-338, 20)
+Dequeue Latency: 0
+Dequeued (e-956, 465)
+Dequeue Latency: 0
+Dequeued (e-628, 100)
+Dequeue Latency: 0
+Dequeued (e-181, 110)
+Dequeued (e-657, 95)
+Dequeue Latency: 0
+Dequeue Latency: 0
+Dequeued (e-961, 320)
+Dequeue Latency: 0
+Dequeued (e-400, 150)
+Dequeue Latency: 0
+Dequeued (e-859, 295)
+Dequeue Latency: 0
+Enqueued (e-863, 90)
+Enqueued (e-865, 215)
+Queue size : 13
+Enqueued (e-370, 315)
+Enqueued (e-818, 240)
+Queue size : 15
+Enqueued (e-551, 250)
+Queue size : 15
+Enqueued (e-796, 330)
+Queue size : 16
+Queue size : 15
+Enqueued (e-404, 290)
+Queue size : 18
+Element (e-5, 245) already dequeued!
+Queue size : 18
+Enqueued (e-341, 380)
+Queue size : 19
+Enqueued (e-630, 440)
+Queue size : 21
+Enqueued (e-574, 50)
+Queue size : 22
+Enqueued (e-504, 140)
+Queue size : 23
+Enqueued (e-932, 385)
+Queue size : 25
+Enqueued (e-443, 475)
+Queue size : 26
+Element (e-43, 265) already dequeued!
+Queue size : 26
+Queue size : 13
+Enqueued (e-818, 200)
+Queue size : 27
+Enqueued (e-149, 400)
+Queue size : 27
+Enqueued (e-445, 120)
+Enqueued (e-316, 130)
+Queue size : 27
+Queue size : 27
+Enqueued (e-218, 430)
+Queue size : 28
+Enqueued (e-622, 270)
+Enqueued (e-770, 70)
+Queue size : 30
+Queue size : 30
+Enqueued (e-57, 40)
+Enqueued (e-527, 460)
+Queue size : 32
+Queue size : 32
+Enqueued (e-218, 470)
+Queue size : 33
+Element (e-420, 405) already dequeued!
+Queue size : 33
+Enqueued (e-839, 325)
+Queue size : 34
+Enqueued (e-135, 175)
+Queue size : 35
+Enqueued (e-802, 255)
+Queue size : 36
+Element (e-741, 185) already dequeued!
+Queue size : 36
+Enqueued (e-1, 410)
+Queue size : 37
+Enqueued (e-134, 285)
+Queue size : 38
+Enqueued (e-787, 375)
+Queue size : 39
+Enqueued (e-981, 260)
+Queue size : 40
+Element (e-592, 395) already dequeued!
+Queue size : 40
+Element (e-777, 180) already dequeued!
+Queue size : 40
+Enqueued (e-518, 170)
+Queue size : 41
+Enqueued (e-467, 210)
+Queue size : 42
+Enqueued (e-169, 105)
+Queue size : 43
+Element (e-899, 85) already dequeued!
+Queue size : 43
+Enqueued (e-340, 55)
+Queue size : 44
+Enqueued (e-487, 0)
+Queue size : 45
+Enqueued (e-285, 345)
+Queue size : 46
+Enqueued (e-943, 60)
+Queue size : 47
+Enqueued (e-431, 275)
+Queue size : 49
+Element (e-237, 305) already dequeued!
+Queue size : 49
+Enqueued (e-879, 65)
+Queue size : 49
+Enqueued (e-777, 145)
+Queue size : 50
+Enqueued (e-157, 450)
+Queue size : 51
+Enqueued (e-874, 45)
+Queue size : 52
+Enqueued (e-713, 190)
+Queue size : 53
+Enqueued (e-290, 25)
+Queue size : 54
+Enqueued (e-457, 455)
+Queue size : 55
+Enqueued (e-931, 355)
+Enqueued (e-958, 15)
+Queue size : 57
+Queue size : 57
+Enqueued (e-277, 125)
+Queue size : 58
+Element (e-929, 350) already dequeued!
+Enqueued (e-316, 425)
+Queue size : 59
+Queue size : 59
+Enqueued (e-648, 480)
+Enqueued (e-213, 75)
+Queue size : 61
+Queue size : 61
+Element (e-305, 335) already dequeued!
+Queue size : 61
+Element (e-15, 390) already dequeued!
+Queue size : 61
+Enqueued (e-499, 135)
+Queue size : 62
+Enqueued (e-580, 370)
+Queue size : 63
+Element (e-495, 340) already dequeued!
+Queue size : 63
+Enqueued (e-823, 365)
+Queue size : 64
+Element (e-338, 20) already dequeued!
+Element (e-847, 30) already dequeued!
+Element (e-862, 160) already dequeued!
+Queue size : 64
+Enqueued (e-68, 155)
+Element (e-956, 465) already dequeued!
+Element (e-240, 445) already dequeued!
+Queue size : 65
+Element (e-657, 95) already dequeued!
+Queue size : 65
+Queue size : 64
+Enqueued (e-800, 360)
+Queue size : 66
+Queue size : 65
+Queue size : 65
+Element (e-181, 110) already dequeued!
+Queue size : 67
+Enqueued (e-587, 310)
+Queue size : 68
+Enqueued (e-624, 435)
+Queue size : 69
+Enqueued (e-953, 5)
+Element (e-628, 100) already dequeued!
+Queue size : 70
+Queue size : 64
+Queue size : 70
+Enqueued (e-390, 495)
+Queue size : 70
+Element (e-961, 320) already dequeued!
+Queue size : 70
+Enqueued (e-519, 165)
+Queue size : 71
+Enqueued (e-697, 115)
+Queue size : 72
+Enqueued (e-630, 485)
+Queue size : 73
+Enqueued (e-659, 220)
+Element (e-859, 295) already dequeued!
+Queue size : 74
+Queue size : 74
+Enqueued (e-776, 415)
+Enqueued (e-627, 205)
+Enqueued (e-683, 35)
+Queue size : 77
+Queue size : 76
+Queue size : 77
+Element (e-400, 150) already dequeued!
+Queue size : 77
+
+Process finished with exit code 0
+

@@ -5,7 +5,6 @@ import com.oracle.queueservice.actors.Producer;
 import com.oracle.queueservice.service.IConcurrentQueue;
 import com.oracle.queueservice.service.impl.HighThroughputConcurrentQueue;
 import com.oracle.queueservice.util.Constants;
-import lombok.extern.log4j.Log4j2;
 
 import java.util.HashSet;
 import java.util.Set;
