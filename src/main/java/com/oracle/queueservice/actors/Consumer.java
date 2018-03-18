@@ -2,20 +2,16 @@ package com.oracle.queueservice.actors;
 
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
+import lombok.AllArgsConstructor;
 
 import java.util.concurrent.Callable;
 
+@AllArgsConstructor
 public class Consumer<T> implements Callable<T> {
 
     private int id;
     private IConcurrentQueue<T> queue;
     private int timeout;
-
-    public Consumer(final int id, final IConcurrentQueue queue, final int timeout) {
-        this.id = id;
-        this.queue = queue;
-        this.timeout = timeout;
-    }
 
     /**
      * Computes a result, or throws an exception if unable to do so.

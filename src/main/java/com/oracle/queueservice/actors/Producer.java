@@ -1,20 +1,16 @@
 package com.oracle.queueservice.actors;
 
 import com.oracle.queueservice.service.IConcurrentQueue;
+import lombok.AllArgsConstructor;
 
 import java.util.concurrent.Callable;
 
+@AllArgsConstructor
 public class Producer<T> implements Callable<T> {
 
     private int id;
     private IConcurrentQueue<T> queue;
     private T element;
-
-    public Producer(final int id, final T element, final IConcurrentQueue<T> queue) {
-        this.id = id;
-        this.queue = queue;
-        this.element = element;
-    }
 
     /**
      * Computes a result, or throws an exception if unable to do so.

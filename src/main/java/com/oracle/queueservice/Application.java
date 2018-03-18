@@ -5,6 +5,7 @@ import com.oracle.queueservice.actors.Producer;
 import com.oracle.queueservice.service.IConcurrentQueue;
 import com.oracle.queueservice.service.impl.HighThroughputConcurrentQueue;
 import com.oracle.queueservice.util.Constants;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class Application {
 
         IntStream.range(0, Constants.THREADS)
                 .forEach(i -> {
-                    workers.add(new Producer<>(i, i*10, queue));
+                    workers.add(new Producer<>(i, queue, i * Constants.ELEMENT_GENERATOR));
                     workers.add(new Consumer<>(i, queue, Constants.TIMEOUT));
                 });
 

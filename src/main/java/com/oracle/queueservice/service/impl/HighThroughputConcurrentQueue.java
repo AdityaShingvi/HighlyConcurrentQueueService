@@ -3,6 +3,7 @@ package com.oracle.queueservice.service.impl;
 import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
 import com.oracle.queueservice.util.Constants;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -43,17 +44,17 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
      * Creates an {@code ConcurrentLinkedQueue} with the given (fixed)
      * capacity and default access policy.
      *
-     * @param capacity the capacity of this queue
+     * @param threadPoolcapacity the capacity of this queue
      * @throws {@code IllegalArgumentException} if {@code capacity < 1}
      */
-    public HighThroughputConcurrentQueue(int capacity) {
-        if (capacity < 1)
+    public HighThroughputConcurrentQueue(int threadPoolcapacity) {
+        if (threadPoolcapacity < 1)
             throw new IllegalArgumentException();
 
         this.idGenerator = new Random();
         this.queue = new ConcurrentLinkedQueue<>();
         this.elementIdToObjectMap = new Hashtable<>();
-        this.watchExecution = Executors.newScheduledThreadPool(capacity);
+        this.watchExecution = Executors.newScheduledThreadPool(threadPoolcapacity);
     }
 
     /**
@@ -103,6 +104,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
     /**
      * Non-blocking Read operation for reading objects from the queue.
+     *
      * @param timeout
      * @return
      */
