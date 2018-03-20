@@ -26,7 +26,7 @@ public class Consumer<T> implements Callable<T> {
         long endTime = System.currentTimeMillis();
         System.out.println("Read Latency: " + (endTime - startTime));
         if (response != null) {
-            // Dequeue elements if they are divisible by 5
+            // Dequeue elements if thread id is divisible by 5
             if (id % 5 == 0) {
                 try {
                     Thread.sleep(2000);

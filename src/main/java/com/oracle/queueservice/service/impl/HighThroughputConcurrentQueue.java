@@ -4,14 +4,15 @@ import com.oracle.queueservice.model.ReadResponse;
 import com.oracle.queueservice.service.IConcurrentQueue;
 import com.oracle.queueservice.util.Constants;
 
-import java.util.Hashtable;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * A Queue library that supports concurrent Producer Consumer system.
@@ -32,7 +33,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     volatile Random idGenerator;
 
     final Queue<Object> queue;
-    volatile Map<String, Object> elementIdToObjectMap;
+    volatile ConcurrentMap<String, Object> elementIdToObjectMap;
     final ScheduledExecutorService watchExecution;
 
     public HighThroughputConcurrentQueue() {
@@ -52,7 +53,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
         this.idGenerator = new Random();
         this.queue = new ConcurrentLinkedQueue<>();
-        this.elementIdToObjectMap = new Hashtable<>();
+        this.elementIdToObjectMap = new ConcurrentHashMap<>();
         this.watchExecution = Executors.newScheduledThreadPool(threadPoolcapacity);
     }
 
@@ -64,7 +65,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
      *               of {@code ReadResponse} object.
      */
     @Override
-    public boolean enqueue(Object object) {
+    public boolean enqueue(Object object) throws NullPointerException {
         if (object == null)
             throw new NullPointerException();
 
@@ -79,7 +80,6 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
     private void offer(String elementId, T object) {
         ReadResponse inputObject = new ReadResponse(elementId, object);
-        final Queue<Object> queue = this.queue;
         queue.add(inputObject);
         elementIdToObjectMap.put(elementId, inputObject);
         System.out.println("Enqueued (" + inputObject.getElementId() + ", " + object + ")");
@@ -111,7 +111,6 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     public ReadResponse read(int timeout) {
         if (timeout < 0) return null;
 
-        final Queue<Object> queue = this.queue;
         final ReadResponse response = (ReadResponse) queue.peek();
         if (response == null)
             return null;
@@ -127,7 +126,6 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
                     }
                     else
                         System.out.println("Element (" + response.getElementId() +", "  + response.getObject() + ") already dequeued!");
-                    System.out.println("Queue size : " + queue.size());
                     watchExecution.shutdown();
                 },
                 timeout, TimeUnit.MILLISECONDS);
