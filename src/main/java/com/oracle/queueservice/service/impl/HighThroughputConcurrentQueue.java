@@ -34,7 +34,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
 
     final Queue<Object> queue;
     volatile ConcurrentMap<String, Object> elementIdToObjectMap;
-    final ScheduledExecutorService watchExecution;
+    volatile ScheduledExecutorService watchExecution;
 
     public HighThroughputConcurrentQueue() {
         this(Constants.THREAD_POOL);
@@ -74,7 +74,7 @@ public class HighThroughputConcurrentQueue<T> implements IConcurrentQueue {
     }
 
     private void offer(T object) {
-        String elementId = Constants.ELEMENT_ID_APPENDER + idGenerator.nextInt(1000);
+        String elementId = Constants.ELEMENT_ID_APPENDER + idGenerator.nextInt(Constants.THREADS*2);
         offer(elementId, object);
     }
 
